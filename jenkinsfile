@@ -1,29 +1,31 @@
 pipeline {
-    agent any
+    agent { 
+        node {
+            label 'docker-agent-python'
+            }
+      }
     triggers{
         pollSCM '*/2 * * * *'
     }
     
     stages {
-        stage('Addition') {
+        stage('sum') {
             steps {
                 script {
-                    def number1 = 5
-                    def number2 = 3
-                    def sum = number1 + number2
-                    echo "The sum is: ${sum}"
+                    def a = 5
+                    def b = 3
+                    echo "The sum is: ${a + b}"
                     env.SUM = sum.toString()
                 }
             }
         }
         
-        stage('Division') {
+        stage('average') {
             steps {
                 script {
                     def sum = env.SUM.toInteger()
-                    def result = sum / 2
-                    echo "The division result is: ${result}"
-                    env.R = result.toString()
+                    echo "The average result is: ${sum / 2}"
+                    env.R = (sum / 2).toString()
                 }
             }
         }
