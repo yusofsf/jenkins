@@ -15,7 +15,7 @@ pipeline {
                     def a = 5
                     def b = 3
                     echo "The sum is: ${a + b}"
-                    env.SUM = sum.toString()
+                    env.SUM = (a + b).toString()
                 }
             }
         }
